@@ -1,0 +1,105 @@
+{
+    // //////////////////////////////////////////////////////////////
+    // Editor: General Settings
+    "editor.fontFamily": " 'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "files.eol": "\n",
+    "workbench.settings.applyToAllProfiles": [
+        "files.eol"
+    ],
+
+    // Editor: Markdown Specific Settings
+    "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+      // "source.fixAll.markdownlint": "explicit",
+      }
+    },
+
+    // Editor: Python Specific Settings
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "ruff.configurationPreference": "filesystemFirst",  // "editorFirst" | "filesystemFirst" | "editorOnly"
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        // "source.fixAll": "explicit",
+        "source.organizeImports": "explicit",
+      },
+    },
+
+    "python.testing.pytestArgs": [],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.cwd": "${workspaceFolder}/tests",
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+
+    "notebook.formatOnSave.enabled": true,
+    "notebook.codeActionsOnSave": {
+      // "notebook.source.fixAll": "explicit",
+      "notebook.source.organizeImports": "explicit"
+      },
+
+    // //////////////////////////////////////////////////////////////
+    // Terminal Settings
+    "terminal.integrated.defaultProfile.windows": "PowerShell",   // "Command Prompt",
+    "terminal.integrated.allowedLinkSchemes": [
+      "file",
+      "http",
+      "https",
+      "mailto",
+      "vscode",
+      "vscode-insiders",
+      "docker-desktop"
+    ],
+
+    // //////////////////////////////////////////////////////////////
+    // Copilot Settings: https://code.visualstudio.com/docs/copilot/reference/copilot-settings
+    // "github.copilot.chat.agent.thinkingTool": true,
+
+    // //////////////////////////////////////////////////////////////
+    // Python Settings
+    // "python.venvPath": "~/venvs",  // UV manages locally per project
+    // "python.analysis.inlayHints.variableTypes": true,
+    // "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.typeCheckingMode": "off",  // "basic" | "standard" | "strict" | "off"
+
+    // //////////////////////////////////////////////////////////////
+    // MCP Settings
+    "chat.mcp.discovery.enabled": true,
+
+    // //////////////////////////////////////////////////////////////
+    // cSpell Extension Settings
+    "cSpell.language": "en-GB",
+    "cSpell.userWords": [
+      "autonumber",
+      "cleanup",
+      "Currentcontrolset",
+      "deleteme",
+      "foobar",
+      "fubar",
+      "jbeattie",
+      "looksee",
+      "myapp",
+      "pathn",
+      "pprint",
+      "pwsh",
+      "pycache",
+      "pyproject",
+      "pytest",
+      "regedit",
+      "rgba",
+      "setrecursionlimit",
+      "venv",
+      "venvs"
+    ],
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "projectManager.git.baseFolders": [
+      "W:\\github"
+    ],
+    "workbench.colorTheme": "Monokai",
+
+
+}
