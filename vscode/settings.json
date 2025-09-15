@@ -22,13 +22,23 @@
     // Editor: Python Specific Settings
     "[python]": {
       "editor.defaultFormatter": "charliermarsh.ruff",
-      "ruff.configurationPreference": "filesystemFirst",  // "editorFirst" | "filesystemFirst" | "editorOnly"
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
         // "source.fixAll": "explicit",
-        "source.organizeImports": "explicit",
-      },
+        "source.organizeImports": "explicit"
+      }
     },
+
+    // Editor: PowerShell Specific Settings
+    "[powershell]": {
+      "files.encoding": "utf8bom",
+      "files.autoGuessEncoding": true
+    },
+
+    // Ruff settings
+    //"ruff.configuration": "~/path/to/ruff.toml"
+    // "ruff.logLevel": "debug", // "trace" | "debug" | "info" | "warn" | "error"
+    // "ruff.logFile": "c:/temp/ruff.log",
 
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
@@ -68,7 +78,12 @@
 
     // //////////////////////////////////////////////////////////////
     // MCP Settings
-    "chat.mcp.discovery.enabled": true,
+    "chat.mcp.discovery.enabled": {
+      "claude-desktop": true,
+      "windsurf": true,
+      "cursor-global": true,
+      "cursor-workspace": true
+    },
 
     // //////////////////////////////////////////////////////////////
     // cSpell Extension Settings
@@ -76,22 +91,31 @@
     "cSpell.userWords": [
       "autonumber",
       "cleanup",
+      "complexipy",
       "Currentcontrolset",
       "deleteme",
       "foobar",
       "fubar",
       "jbeattie",
+      "linenos",
       "looksee",
+      "mklink",
       "myapp",
+      "noqa",
       "pathn",
+      "Powerline",
       "pprint",
       "pwsh",
       "pycache",
+      "pycodestyle",
+      "pyflakes",
       "pyproject",
+      "pyright",
       "pytest",
       "regedit",
       "rgba",
       "setrecursionlimit",
+      "USERPROFILE",
       "venv",
       "venvs"
     ],
@@ -100,6 +124,9 @@
       "W:\\github"
     ],
     "workbench.colorTheme": "Monokai",
+
+    "terminal.integrated.enablePersistentSessions": false,
+    "terminal.integrated.persistentSessionReviveProcess": "never"
 
 
 }
