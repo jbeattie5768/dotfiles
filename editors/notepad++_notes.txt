@@ -1,0 +1,15 @@
+Notepad++ notes
+---------------
+
+Default config file located at %appdata%\Notepad++, which resolves to C:\Users\<username>\AppData\Roaming\Notepad++
+
+You can change to another location in Settings > Preferences > Cloud & Link > Cloud Config directory to some other location, e.g. P:\Temp.
+If you want it to use AppData, remove the Cloud Config setting.
+
+Plugins:
+========
+PLugin List at https://github.com/notepad-plus-plus/nppPluginList/blob/master/doc/plugin_list_x64.md
+
+Compare: https://github.com/pnedev/compare-plugin
+EditorConfig: https://github.com/editorconfig/editorconfig-notepad-plus-plus
+MarkdownViewerPlusPlus: https://nea.github.io/MarkdownViewerPlusPlus/
