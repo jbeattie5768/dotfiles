@@ -1,2 +1,43 @@
+"===============
+" VIM SETTINGS
+"===============
+"---------------
+" Comments to describe what the line of code below does
+"" Actual working code for the .vimrc file but still commented.
+"---------------
+
+"---------------
+" Disable compatibility with vi which can cause unexpected issues.
+" This must be first, it changes other options as a side effect.
+"---------------
+set nocompatible
+
+"---------------
+" Set directories
+"---------------
 set backupdir=~/.vim/backupdir
+"" set nobackup
+
 set directory=~/.vim/swapdir
+"" set noswapfile
+
+" This ,might be pointless as Git for Windows puts _vimrc in ~/
+set viminfo+=n~/.vim/viminfo
+
+"---------------
+" Settings
+"---------------
+" Enable type file detection.
+filetype on
+
+" Enable plugins and load plugin for the detected file type.
+filetype plugin on
+
+" Load an indent file for the detected file type.
+filetype indent on
+
+" Turn syntax highlighting on.
+syntax on
+
+" Add numbers to each line on the left-hand side.
+set number
