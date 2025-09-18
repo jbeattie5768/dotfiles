@@ -1,5 +1,4 @@
-﻿
-# From dotfiles directory: .\win_setup\install\install_apps.ps1
+﻿# From dotfiles directory: .\win_setup\install\install_apps.ps1
 #
 # Check PS1 script with:
 # Invoke-ScriptAnalyzer .\win_setup\install\install_apps.ps1
@@ -8,26 +7,37 @@
         Justification='Valid in this use-case for user feedback')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingInvokeExpression', '',
         Justification='Using cmd exactly as Chocolatey provides')]
-param()  # Dummy to allow above rules to work
 
 # #################################################
-# Assume <danger detected> CWD is dotfiles root
-$ChocoAppsFile = ".\win_setup\install\choco_apps.cfg"
+# Optionally pass Args to PS1 script
+# ConfigFile is a text file with Choco package names, one per line, in format:
+# [package_name --params]
+# Default Choco Apps ConfigFile is ".\win_setup\install\choco_apps.cfg"
+# Note: If you pass a custom ConfigFile, it must be in the same format as the default
+#
+# Example Args would be:
+# .\win_setup\install\install_apps.ps1 -ConfigFile c:\temp\my_choco_apps.txt
+# .\win_setup\install\install_apps.ps1 -DisableChoco $true -DisableWinget $false -DisableWSL $true
+# .\win_setup\install\install_apps.ps1 -ConfigFile c:\temp\my_choco_apps.txt -DisableWinget $true -DisableWSL $true
+param(
+    # Default assumes <danger detected!> CWD is dotfiles root
+    [string]
+    $ConfigFile = ".\win_setup\install\choco_apps.cfg",
+
+    # Debug/Testing: $true (disable install ) or $false (enable install)
+    [bool]
+    $DisableChoco = $false,   # Disable Choco installs
+    [bool]
+    $DisableWinget = $false,  # Disable WinGet installs
+    [bool]
+    $DisableWSL = $false      # Disable WSL install
+)
 
 # #################################################
-# Debug/Testing: $true (disable install ) or $false (enable install)
-$DisableChoco = $false    # Disable Choco installs
-$DisableWinget = $false   # Disable WinGet installs
-$DisableWSL = $false      # Disable WSL install
-
-# #################################################`
-# Needs to be run as Admin
-# Powershell script to install apps via Chocolatey and WinGet
-# See <https://chocolatey.org> for Choco
-# See <https://learn.microsoft.com/en-us/windows/package-manager/winget/> for WinGet
-
 Write-Host "`nInstall Script Started"
+
 # #################################################
+# Script needs to be run as Admin - not all require admin, but most do
 # Check if Admin
 if([bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544"))
 {
@@ -40,7 +50,8 @@ else
 }
 
 # #################################################
-# Check if Choco is installed
+# Check if Choco is installed, if not, install it
+# See <https://chocolatey.org> for Choco
 if($DisableChoco){
     Write-Host "Debug mode, skipping Choco checks"
 }
@@ -60,28 +71,33 @@ else {
 }
 
 # #################################################
-# File to be installed via Chocolatey are listed in "choco_apps.cfg"
-#
+# File(s) to be installed via Chocolatey are listed in "choco_apps.cfg" by default
 if($DisableChoco){
     Write-Host "Debug mode, skipping Choco installs"
 }
 else{
-    Write-Host "`nChoco Install Starting"
+    Write-Host "`nChoco Install Starting using config file: $ConfigFile`n"
 
-    foreach($line in Get-Content $ChocoAppsFile | Where-Object {$_ -NOTLIKE "#*"}) {
-        if ($line.trim()) { # quick check to verify that data is present and not all spaces
+    foreach($line in Get-Content $ConfigFile | Where-Object {$_ -NOTLIKE "#*"}) {
+        if ($line.trim()) { # quick check to verify that data is present and not a blank line
+
             $text = [regex]::matches($line,'(?<=\[).+?(?=\])').value  # Extract data between []
             $text = $text.trim()  # I had an entry with a space at the end, like [xxx ]...
-            # Write-Host "Extracted: $text"
-            choco install -y $text
+
+            # choco install -y $text  # Does not work if there are params, like `[pkg --version=1.2.3]`
+            # Split into PackageName and PackageParameters (if there are any parameters)
+            $PkgName,$PkgParams = $text.Split(' ', 2)  # Just bundle multi params into $PkgParams
+
+            # Write-Host "Extracted: $text as $($PkgName) $($PkgParams)"
+            choco install -y $PkgName $PkgParams
         }
     }
-
     Write-Host "`nChoco Install Complete"
 }
 
 # #################################################
-# WinGet installs
+# WinGet installs (WinGet is pre-installed in Win11)
+# See <https://learn.microsoft.com/en-us/windows/package-manager/winget/> for WinGet
 if($DisableWinget){
     Write-Host "Debug mode, skipping WinGet installs"
 }
@@ -91,24 +107,24 @@ else{
     winget search Microsoft.PowerShell  # Show Versions Available
     winget install --id Microsoft.PowerShell.Preview --source winget
     winget install --force Microsoft.VisualStudioCode --override '/VERYSILENT /SP- /MERGETASKS="!runcode,!desktopicon,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"'
-    Install-Module -Name PSScriptAnalyzer -Force  # PowerShell code checker
+    # Since we installed PS, we can also install PSScriptAnalyzer while I remember
+    Install-Module -Name PSScriptAnalyzer -Force -Scope AllUsers
 }
 # #################################################
-# WSL install
-# Win11 recognises 'wsl' command out-of-the-box
+# WSL install - Win11 recognises 'wsl' command out-of-the-box
+# See <https://learn.microsoft.com/en-us/windows/wsl/install> for WSL
 if($DisableWSL){
     Write-Host "Debug mode, skipping WSL install"
 }
 else{
     Write-Host "`nInstalling WSL and Ubuntu-22.04"
-    # See <https://learn.microsoft.com/en-us/windows/wsl/install>
     wsl --install Ubuntu-22.04  # Use 'wsl.exe --list --online' for list
     wsl -s Ubuntu-22.04         # Set as default (in case of more than one distro)
     wsl --list --all            # List Distro's
 }
 
 # #################################################
-# Python install (now handled by UV)
+# Python install - now handled by UV
 Write-Host "`nReminder: Install Python via UV, e.g.,"
 Write-Host "uv python install 3.14  # Latest 3.14 version"
 # .\python-3.13.3-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir='C:\Python313'

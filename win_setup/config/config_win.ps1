@@ -9,11 +9,11 @@ param()  # Dummy to allow above rules to work
 
 # #################################################
 # Config windows
-# Windows SymbolicLink's can only be created by Admin
-
 Write-Host "`nConfig Script Started"
+
 # #################################################
 # Check if Admin
+# Windows SymbolicLink's can only be created by Admin
 if([bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544"))
 {
     Write-Host "`nRunning as Admin. Continuing..."
@@ -36,7 +36,7 @@ New-Item -ItemType SymbolicLink -Path $symlinklocation -Target $originallocation
 &cmd /c %APPDATA%\Microsoft\Windows\Start^ Menu\Programs\Startup\map_local_drive.bat
 
 # #################################################
-# Windows Explorer preferred Settings
+# Windows Explorer preferred Settings - not sure all of these work!
 Write-Host "`nSetting Windows Explorer Preferences..."
 # Majority taken from:
 #  <https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/FileExplorerSettings.ps1>
@@ -59,8 +59,6 @@ Set-ItemProperty -Path $hive -Name NavPaneExpandToCurrentFolder -Value 1
 Set-ItemProperty -Path $hive -Name NavPaneShowAllFolders -Value 1
 # Opens PC to This PC, not quick access
 Set-ItemProperty -Path $hive -Name LaunchTo -Value 1
-# Taskbar where window is open for multi-monitor
-Set-ItemProperty -Path $hive -Name MMTaskbarMode -Value 2
 
 Write-Host "You may need to restart the File Explorer for changes to take effect."
 
