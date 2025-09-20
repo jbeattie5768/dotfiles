@@ -1,5 +1,11 @@
-﻿# From dotfiles directory: .\win_setup\install\install_apps.ps1
+﻿# #################################################
+# Windows Setup Install Apps Script
 #
+# From dotfiles directory: .\win_setup\install\install_apps.ps1
+#
+# #################################################
+
+# #################################################
 # Check PS1 script with:
 # Invoke-ScriptAnalyzer .\win_setup\install\install_apps.ps1
 # Disable rules for this script:
@@ -20,40 +26,45 @@
 # .\win_setup\install\install_apps.ps1 -DisableChoco $true -DisableWinget $false -DisableWSL $true
 # .\win_setup\install\install_apps.ps1 -ConfigFile c:\temp\my_choco_apps.txt -DisableWinget $true -DisableWSL $true
 param(
-    # Default assumes <danger detected!> CWD is dotfiles root
+    # Default assumes CWD is dotfiles root
     [string]
     $ConfigFile = ".\win_setup\install\choco_apps.cfg",
 
-    # Debug/Testing: $true (disable install ) or $false (enable install)
+    # mainly used for Debug/Testing: $true (disable install ) or $false (enable install)
     [bool]
     $DisableChoco = $false,   # Disable Choco installs
     [bool]
     $DisableWinget = $false,  # Disable WinGet installs
     [bool]
-    $DisableWSL = $false      # Disable WSL install
+    $DisableWSL = $false,     # Disable WSL install
+    [bool]
+    $DisableFonts = $false,   # Disable Fonts install
+    [bool]
+    $DisableScripts = $false  # Disable PowerShell Scripts install
 )
 
 # #################################################
 Write-Host "`nInstall Script Started"
 
 # #################################################
-# Script needs to be run as Admin - not all require admin, but most do
-# Check if Admin
+# Check for Admin Rights
+# Script needs to be run as Admin <- not all require admin, but *most* do
+# There seems to be a few ways of checking for Admin rights
 if([bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544"))
 {
     Write-Host "`nRunning as Admin. Continuing..."
 }
 else
 {
-    Write-Host "`nPlease run script as Admin. Not currently running as Admin, exiting..."
+    Write-Host "`nPlease run script as Admin. Not currently running as Admin, so exiting..."
     exit
 }
 
 # #################################################
-# Check if Choco is installed, if not, install it
+# Check for Choco
 # See <https://chocolatey.org> for Choco
 if($DisableChoco){
-    Write-Host "Debug mode, skipping Choco checks"
+    Write-Host "Skipping Choco checks"
 }
 else {
     $chocoinstalled = Get-Command -Name choco.exe -ErrorAction SilentlyContinue
@@ -71,9 +82,12 @@ else {
 }
 
 # #################################################
+# 1. Chocolatey
+# #################################################
+
 # File(s) to be installed via Chocolatey are listed in "choco_apps.cfg" by default
 if($DisableChoco){
-    Write-Host "Debug mode, skipping Choco installs"
+    Write-Host "Skipping Choco installs"
 }
 else{
     Write-Host "`nChoco Install Starting using config file: $ConfigFile`n"
@@ -82,61 +96,109 @@ else{
         if ($line.trim()) { # quick check to verify that data is present and not a blank line
 
             $text = [regex]::matches($line,'(?<=\[).+?(?=\])').value  # Extract data between []
-            $text = $text.trim()  # I had an entry with a space at the end, like [xxx ]...
+            $text = $text.trim()  # I had an entry with a space at the end, like [xxx ]
 
             # choco install -y $text  # Does not work if there are params, like `[pkg --version=1.2.3]`
             # Split into PackageName and PackageParameters (if there are any parameters)
-            $PkgName,$PkgParams = $text.Split(' ', 2)  # Just bundle multi params into $PkgParams
+            $PkgName,$PkgParams = $text.Split(' ', 2)  # Just bundle multi-params into $PkgParams
 
-            # Write-Host "Extracted: $text as $($PkgName) $($PkgParams)"
             choco install -y $PkgName $PkgParams
         }
     }
-    Write-Host "`nChoco Install Complete"
 }
 
 # #################################################
-# WinGet installs (WinGet is pre-installed in Win11)
+# 2. WinGet
+# #################################################
+
+# WinGet is pre-installed in Win11
 # See <https://learn.microsoft.com/en-us/windows/package-manager/winget/> for WinGet
 if($DisableWinget){
-    Write-Host "Debug mode, skipping WinGet installs"
+    Write-Host "Skipping WinGet installs"
 }
 else{
     Write-Host "`nWinGet Install Starting`n"
     # Note: PowerShell (v7) and Windows Powershell (v5) are different
     winget search Microsoft.PowerShell  # Show Versions Available
-    winget install --id Microsoft.PowerShell.Preview --source winget
+    winget install --id Microsoft.PowerShell.Preview --source winget  # v7
     winget install --force Microsoft.VisualStudioCode --override '/VERYSILENT /SP- /MERGETASKS="!runcode,!desktopicon,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"'
-    # Since we installed PS, we can also install PSScriptAnalyzer while I remember
-    Install-Module -Name PSScriptAnalyzer -Force -Scope AllUsers
 }
 # #################################################
-# WSL install - Win11 recognises 'wsl' command out-of-the-box
+# 3. WSL
+# #################################################
+
+# Win11 recognises 'wsl' command out-of-the-box
 # See <https://learn.microsoft.com/en-us/windows/wsl/install> for WSL
 if($DisableWSL){
-    Write-Host "Debug mode, skipping WSL install"
+    Write-Host "Skipping WSL install"
 }
 else{
     Write-Host "`nInstalling WSL and Ubuntu-22.04"
-    wsl --install Ubuntu-22.04  # Use 'wsl.exe --list --online' for list
-    wsl -s Ubuntu-22.04         # Set as default (in case of more than one distro)
+
+    $LinuxDistro = "Ubuntu-22.04"
+    wsl --install $LinuxDistro  # Use 'wsl.exe --list --online' for list of distro's
+    wsl -s $LinuxDistro         # Set as default (in case of more than one distro)
     wsl --list --all            # List Distro's
 }
 
 # #################################################
-# Python install - now handled by UV
+# 4. Fonts
+# #################################################
+
+if($DisableFonts){
+    Write-Host "Skipping Fonts install"
+}
+else{
+    Write-Host "`nInstalling Fonts"
+    # I want o use the MS Cascadia font family. No idea which ones I need/want so install:
+    # Cascadia Code, Cascadia Mono, Cascadia Code PL, Cascadia Mono PL, Cascadia Code NF, Cascadia Mono NF
+
+    # Use this PS1 script: <https://raw.githubusercontent.com/jpawlowski/nerd-fonts-installer-PS/main/Invoke-NerdFontInstaller.ps1>
+    # See <https://github.com/ryanoasis/nerd-fonts/discussions/1697>
+    # Can use direct, or install with: Install-Script -Name Invoke-NerdFontInstaller
+    # We will install direct from the web...very nice PS script!
+    & ([scriptblock]::Create((Invoke-WebRequest 'https://raw.githubusercontent.com/jpawlowski/nerd-fonts-installer-PS/main/Invoke-NerdFontInstaller.ps1'))) -Name cascadia-code, cascadia-mono
+}
+
+# #################################################
+# 5. PowerShell Scripts
+# #################################################
+
+# Nice collections of Scripts at <https://github.com/fleschutz/PowerShell>
+if($DisableScripts){
+    Write-Host "Skipping PowerShell Scripts install"
+}
+else{
+    Write-Host "`nInstalling PowerShell Scripts"
+    Install-Module -Name PSScriptAnalyzer -Force -Scope AllUsers
+}
+
+# #################################################
+# 6. Python
+# #################################################
+
+Write-Host "`nInstalling Python"
+
 Write-Host "`nReminder: Install Python via UV, e.g.,"
 Write-Host "uv python install 3.14  # Latest 3.14 version"
 # .\python-3.13.3-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir='C:\Python313'
 
 # #################################################
+# 7. Miscellaneous Installs
+# #################################################
+
+Write-Host "`nInstalling Miscellaneous"
+
 # FreeFileSync install
 # Choco package is outdated: https://community.chocolatey.org/packages/freefilesync
 # Not yet found a way to auto download, instead download and install
 # manually (use the defaults and install as local)
 Write-Host "`nDownload and install 'FreeFileSync' Manually from: "
 Write-Host "<https://freefilesync.org/download.php >`n"
-Read-Host 'Press Enter to end...'
+Read-Host 'Press Enter to continue...'
 
 # #################################################
-Write-Host "Install Script Completed"
+# End of Script
+# #################################################
+
+Write-Host "`nInstall Script Completed"

@@ -1,4 +1,7 @@
-﻿# From dotfiles directory: .\win_setup\config\config_win.ps1
+﻿# #################################################
+# Configure Windows Script
+#
+# From dotfiles directory: .\win_setup\config\config_win.ps1
 #
 # Check PS1 script with:
 # Invoke-ScriptAnalyzer .\win_setup\config\config_win.ps1
@@ -12,8 +15,11 @@ param()  # Dummy to allow above rules to work
 Write-Host "`nConfig Script Started"
 
 # #################################################
-# Check if Admin
-# Windows SymbolicLink's can only be created by Admin
+# Check for Admin Rights
+# #################################################
+
+# Script needs to be run as Admin <- Windows SymbolicLink's can only be created by Admin
+# There seems to be a few ways of checking for Admin rights
 if([bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544"))
 {
     Write-Host "`nRunning as Admin. Continuing..."
@@ -26,8 +32,10 @@ else
 
 # #################################################
 # Map local network drive at login
-Write-Host "`nCreating SymLink for Mapped Drives"
-# Create symlink in Startup folder to batch file in dotfiles
+# #################################################
+Write-Host "`nCreating SymbolicLink for Mapped Drives"
+
+# Create SymbolicLink in Startup folder to batch file in dotfiles
 $symlinklocation  = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\map_local_drive.bat"
 $originallocation = "$env:USERPROFILE\dotfiles\win_setup\config\map_local_drive.bat"
 New-Item -ItemType SymbolicLink -Path $symlinklocation -Target $originallocation
@@ -37,7 +45,9 @@ New-Item -ItemType SymbolicLink -Path $symlinklocation -Target $originallocation
 
 # #################################################
 # Windows Explorer preferred Settings - not sure all of these work!
+# #################################################
 Write-Host "`nSetting Windows Explorer Preferences..."
+
 # Majority taken from:
 #  <https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/scripts/FileExplorerSettings.ps1>
 $hive = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
@@ -63,4 +73,7 @@ Set-ItemProperty -Path $hive -Name LaunchTo -Value 1
 Write-Host "You may need to restart the File Explorer for changes to take effect."
 
 # #################################################
+# End of Script
+# #################################################
+
 Write-Host "`nConfig Script Completed"
