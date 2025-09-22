@@ -1,7 +1,7 @@
 {
     // //////////////////////////////////////////////////////////////
     // Editor: General Settings
-    "editor.fontFamily": " 'CaskaydiaCove NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": " 'Cascadia Code NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
     "files.eol": "\n",
@@ -89,36 +89,12 @@
     // cSpell Extension Settings
     "cSpell.language": "en-GB",
     "cSpell.userWords": [
-      "autonumber",
-      "cleanup",
-      "complexipy",
-      "Currentcontrolset",
-      "deleteme",
-      "foobar",
-      "fubar",
-      "jbeattie",
-      "linenos",
-      "looksee",
-      "mklink",
-      "myapp",
-      "noqa",
-      "pathn",
-      "Powerline",
-      "pprint",
-      "pwsh",
-      "pycache",
-      "pycodestyle",
-      "pyflakes",
-      "pyproject",
-      "pyright",
+      "beatt",
       "pytest",
-      "regedit",
-      "rgba",
-      "setrecursionlimit",
-      "USERPROFILE",
       "venv",
       "venvs"
     ],
+
     "github.copilot.nextEditSuggestions.enabled": true,
     "projectManager.git.baseFolders": [
       "W:\\github"
@@ -127,6 +103,5 @@
 
     "terminal.integrated.enablePersistentSessions": false,
     "terminal.integrated.persistentSessionReviveProcess": "never"
-
 
 }
