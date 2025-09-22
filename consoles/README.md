@@ -1,22 +1,36 @@
-# config-files\git
+# dotfiles\consoles
 
-## Bash
+## dotfiles\consoles\config_consoles.ps1
 
-`C:\Users\beatt\.bashrc`
+```pwsh
+# PowerShell with Admin rights
+.\editors\config_consoles.ps1
+```
 
-~~`c:\Users\beatt\.bash_profile`~~  # Not saved, created by GIT
+Creates SymbolicLinks for:
 
-## PowerShell
+---
 
-`$profile | get-member -name *user*`  # The candidate locations for profile files
-`echo $profile`
-`C:\Users\beatt\OneDrive\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+## 1. PowerShell Profile
 
-## Windows Terminal
+SymbolicLink for the `Microsoft.PowerShell_profile.ps1` configuration file for [PowerShell 7.x](https://learn.microsoft.com/en-us/powershell/scripting/what-is-windows-powershell?view=powershell-7.5).
 
-`C:\Users\beatt\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
+Use the PS commands:
 
-## Oh-My_posh
+* `$profile | get-member -name *user*` # List the candidate locations for profile files
+* `echo $profile`  # The Current Profile in use
 
-`C:\Users\beatt\jb29_theme.omp.json`  # As defined in $PROFILE
+## 2. Windows Terminal
 
+SymbolicLink for the `settings.json` configuration file for [Windows Terminal](https://learn.microsoft.com/en-gb/windows/terminal/).
+
+The Configuration assumes Cascadia Font(s), Git Bash and PowerShell 7 being available.
+
+## 3. Oh-My_posh
+
+The [Oh-My_Posh](https://ohmyposh.dev/) theme, `jb29_theme.omp.json`, to be used for PowerShell and Bash.  
+This is my own theme and is in both the PowerShell profile as well as the Bash profile files.
+
+## 4. Bash
+
+SymbolicLink for the `.bashrc` file, which is actually for [Git Bash](https://gitforwindows.org/).
