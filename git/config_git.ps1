@@ -1,7 +1,13 @@
-﻿# From dotfiles directory: .\git\git_config.ps1
+﻿# #################################################
+# Git Setup Script
 #
+# From dotfiles directory: .\git\config_git.ps1
+#
+# #################################################
+
+# #################################################
 # Check PS1 script with:
-# Invoke-ScriptAnalyzer .\git\git_config.ps1
+# Invoke-ScriptAnalyzer .\git\config_git.ps1
 # Disable rules for this script:
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '',
         Justification='Valid in this use-case for user feedback')]
@@ -24,8 +30,10 @@ else
 
 # #################################################
 # First time setup
-git config --global user.name "jbeattie5768"
-git config --global user.email jbeattie5768@gmail.com
+$name = Read-Host 'What is your username?'
+$email = Read-Host 'What is your email?'
+git config --global user.name "$name"
+git config --global user.email "$email"
 
 # Default editor is Vi(m)
 # git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe'
@@ -47,7 +55,7 @@ git config --global mergetool.prompt false
 git config --global core.excludesfile %USERPROFILE%\dotfiles\git\.gitignore  # Global `.gitignore` file
 
 # #################################################
-git config --list --show-origin --show-scope # Display scope and file location
+# git config --list --show-origin # Display config and file location
 
 # #################################################
 Write-Host "Config Script Completed"
