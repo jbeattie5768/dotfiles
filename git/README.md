@@ -7,15 +7,26 @@
 .\editors\config_git.ps1
 ```
 
-Configures Git through Git commands, so it assumes Git has been installed and is on the path.
+Creates a `.gitconfig.user` in users home directory populated with the user details requested by the PS1 script. This file is _included_ in the `.gitconfig` file.
+
+Creates SymbolicLinks for `.gitconfig` and `.gitignore`.
+
+Nothing is done with Git itself, it's assumed Git has been installed and is on the path.
 
 ---
 
 ## dotfiles\git\\.gitignore
 
-`.\git\.gitignore` is a global _.gitignore_ file, set in above PS1 script.
+`.\git\.gitconfig` is a global _.gitconfig_ file, SymLink'd in above PS1 script.
 
+`.\git\.gitignore` is a global _.gitignore_ file, SymLink'd in above PS1 script.  
 Other `.gitignore` files will be included in specific repos/projects
+
+## .gitconfig References
+
+- [Git SCM _.gitconfig_ Documentation](https://git-scm.com/docs/git-config)
+- [Atlassian _.gitconfig_ Documentation](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-config)
+- [Example _.gitconfig_](https://gist.github.com/pksunkara/988716)
 
 ## .gitignore References
 

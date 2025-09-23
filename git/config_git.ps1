@@ -17,7 +17,11 @@ param()  # Dummy to allow above rules to work
 Write-Host "`nGit Config Script Started"
 
 # #################################################
+$originallocation = "$env:USERPROFILE\dotfiles\git"
+
+# #################################################
 # Check if Admin
+# Windows SymbolicLink's can only be created by Admin
 if([bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544"))
 {
     Write-Host "`nRunning as Admin. Continuing..."
@@ -29,33 +33,45 @@ else
 }
 
 # #################################################
-# First time setup
+# Get User Details
 $name = Read-Host 'What is your username?'
 $email = Read-Host 'What is your email?'
-git config --global user.name "$name"
-git config --global user.email "$email"
 
-# Default editor is Vi(m)
-# git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe'
-# git config --global core.editor "'C:/Program Files/Sublime Text/sublime_text.exe' -w"
+# Create separate .gitconfig.user file for user-specific settings
+if (Test-Path "$env:USERPROFILE\.gitconfig.user")
+{
+    Write-Host "`nOverwriting existing .gitconfig.user"
+}
+else {
+    Write-Host "`nCreating new .gitconfig.user"
+}
+$null = New-Item -Path "$env:USERPROFILE\.gitconfig.user" -ItemType File -Force
+Add-Content -Path "$env:USERPROFILE\.gitconfig.user" -Value "[user]`n    name = $name`n    email = $email"
 
-git config --global init.defaultBranch main
-# git config --global commit.template ~/.gitmessage.txt
+# #################################################
+# .gitconfig
+Write-Host "`nCreating SymbolicLink for .gitconfig"
+# Force create SymbolicLink's and assign to $null to suppress output of New-Item cmdlet
+$null = New-Item -ItemType SymbolicLink -Force -Path "$env:USERPROFILE\.gitconfig" -Target "$originallocation\.gitconfig"
 
-# See: https://stackoverflow.com/questions/1967370/git-replacing-lf-with-crlf
-git config --system core.autocrlf false
-
-# Merge Tool: note that git uses `merge.tool` and `mergetool`, two different commands
-git config --global merge.tool winmerge
-# git config --global mergetool.keepBackup false
-git config --replace --global mergetool.winmerge.cmd "\""C:\Program Files\WinMerge\WinMergeU.exe"\" -e -u -dl \"Base\" -dr \"Mine\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\""
-git config --global mergetool.prompt false
-
+# #################################################
+# .gitignore
 # Global ignore, can additionally add per project
-git config --global core.excludesfile %USERPROFILE%\dotfiles\git\.gitignore  # Global `.gitignore` file
+# Could have added to .gitconfig as `%USERPROFILE%\dotfiles\git\.gitignore`
+Write-Host "Creating SymbolicLink for .gitignore"
+$null = New-Item -ItemType SymbolicLink -Force -Path "$env:USERPROFILE\.gitignore" -Target "$originallocation\.gitignore"
 
 # #################################################
-# git config --list --show-origin # Display config and file location
+# Additional Git Config Settings
+# See: https://git-scm.com/docs/git-config
+
+# Default editor is Vi(m), alternative editors could be....
+# git config --global core.editor "'C:\Program Files\Notepad++\notepad++.exe'
+# git config --global core.editor "'C:\Program Files\Sublime Text\sublime_text.exe' -w"
+
+# git config --global commit.template ~\.gitmessage.txt
+
+# git config --replace --global mergetool.winmerge.cmd "\""C:\Program Files\WinMerge\WinMergeU.exe"\" -e -u -dl \"Base\" -dr \"Mine\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\""
 
 # #################################################
-Write-Host "Config Script Completed"
+Write-Host "`nGit Config Script Completed"

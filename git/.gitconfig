@@ -1,0 +1,40 @@
+[alias]
+	st = status -s
+    ci = commit
+    co = checkout
+    br = branch
+
+    # List aliases
+	aliases = config --get-regexp alias
+
+    # View abbreviated SHA, desc and hist graph of the last 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[init]
+	defaultBranch = main
+
+[credential]
+	helper = wincred
+
+[merge]
+	tool = winmerge
+
+[mergetool]
+	prompt = false
+
+[mergetool "winmerge"]
+	cmd = \\\"C:\\Program Files\\WinMerge\\WinMergeU.exe
+
+[core]
+	excludesfile = .gitignore
+    # See: https://stackoverflow.com/questions/1967370/git-replacing-lf-with-crlf
+    autocrlf = false
+
+[include]
+  path = .gitconfig.user  # User credentials in separate file
