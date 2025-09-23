@@ -186,10 +186,12 @@ A number of changes to the File Explorer settings are made.
 
 ## Not Yet Added
 
+* `background-3840x2160.png`: Not yet set the Desktop Wallpaper in PS1 script
+  * See this webpage for how that might be done: <https://www.joseespitia.com/2017/09/15/set-wallpaper-powershell-function/>
 * `PYTHONPATH` - I don’t yet use this, but I have plans!
-* `uv tool install justpath`  # <https://github.com/epogrebnyak/justpath>
-* The _`$USERPROFILE`_ folder may not be the same as _`$USERNAME`_. Annoyingly, by default Win11 uses the first five characters of your MS Account for the _`$USERPROFILE`_ folder. If that does not match your _`$USERNAME`_, change it by following:
-  * <https://www.elevenforum.com/t/change-name-of-user-profile-folder-in-windows-11.2133/>
+* The _`$USERPROFILE`_ folder may not be the same as _`$USERNAME`_.
+  * Annoyingly, by default Win11 uses the first five characters of your MS Account for the _`$USERPROFILE`_ folder. If that does not match your _`$USERNAME`_.
+  * Change it by following: <https://www.elevenforum.com/t/change-name-of-user-profile-folder-in-windows-11.2133/>
 
 ---
 
