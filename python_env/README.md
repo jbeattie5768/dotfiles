@@ -40,3 +40,12 @@ Ruff will check for local project Ruff _TOML_ files, and if not found will event
 ## 4. VSCode Settings and Extensions
 
 VSCode settings are linked via the `.\python_env\vscode\vscode_settings.ps1` script.
+
+```pwsh
+* settings.json          # User settings for VSCode
+* keybindings.json       # User keyboard shortcuts
+* mcp.json               # MCP servers
+* vscode_extensions.txt  # List of Extensions to install
+* vscode_settings.ps1    # PS1 script to apply VSCode settings
+* vscode_extensions.ps1  # PS1 Script to import/export Extensions
+```
