@@ -33,12 +33,22 @@ else
 # #################################################
 # Map local network drive at login
 # #################################################
-Write-Host "`nCreating SymbolicLink for Mapped Drives"
+$LocalDrivePath = "c:\w_local_drive"
+if (Test-Path $LocalDrivePath) {
+    Write-Host "Local Drive Path ($LocalDrivePath) already exists, continuing..."
+}
+else
+{
+    Write-Host "Local Drive Path ($LocalDrivePath) does not exist, creating..."
+    New-Item -ItemType Directory -Path $LocalDrivePath
+}
 
-# Create SymbolicLink in Startup folder to batch file in dotfiles
+Write-Host "`nCreating SymbolicLink for Mapped Drives"
+# Create SymbolicLink in Startup folder to the batch file in dotfiles
 $symlinklocation  = "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\map_local_drive.bat"
 $originallocation = "$env:USERPROFILE\dotfiles\win_setup\config\map_local_drive.bat"
-New-Item -ItemType SymbolicLink -Path $symlinklocation -Target $originallocation
+# Force the creation and suppress output
+$null = New-Item -ItemType SymbolicLink -Path $symlinklocation -Target $originallocation -Force
 
 # Even though we are Admin, we can run the batch file
 &cmd /c %APPDATA%\Microsoft\Windows\Start^ Menu\Programs\Startup\map_local_drive.bat
