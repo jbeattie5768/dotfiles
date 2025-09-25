@@ -119,6 +119,7 @@ if($DisableWinget){
 else{
     Write-Host "`nWinGet Install Starting`n"
     # Note: PowerShell (v7) and Windows Powershell (v5) are different
+    # See <https://learn.microsoft.com/en-us/powershell/scripting/whats-new/differences-from-windows-powershell?view=powershell-7.5>
     winget search Microsoft.PowerShell  # Show Versions Available
     winget install --id Microsoft.PowerShell.Preview --source winget  # v7
     winget install --force Microsoft.VisualStudioCode --override '/VERYSILENT /SP- /MERGETASKS="!runcode,!desktopicon,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"'
@@ -136,9 +137,12 @@ else{
     Write-Host "`nInstalling WSL and Ubuntu-22.04"
 
     $LinuxDistro = "Ubuntu-22.04"
-    wsl --install $LinuxDistro  # Use 'wsl.exe --list --online' for list of distro's
-    wsl -s $LinuxDistro         # Set as default (in case of more than one distro)
-    wsl --list --all            # List Distro's
+    # wsl.exe --list --online   # List of available Distros
+    wsl --install $LinuxDistro --no-launch
+    wsl -s $LinuxDistro         # Set as default (in case of more than one Distro)
+    # wsl --list --all          # List Distro's
+    # wsl.exe -d $LinuxDistro   # Start Distro
+    # You will be asked for username/password when 1st started
 }
 
 # #################################################
@@ -170,7 +174,17 @@ if($DisableScripts){
 }
 else{
     Write-Host "`nInstalling PowerShell Scripts"
+    # <https://github.com/PowerShell/PSScriptAnalyzer>
     Install-Module -Name PSScriptAnalyzer -Force -Scope AllUsers
+
+    # <https://github.com/devblackops/Terminal-Icons>
+    Install-Module -Name Terminal-Icons -Repository PSGallery
+
+    # <https://ohmyposh.dev/docs/installation/windows>
+    # Install-Module -Name oh-my-posh -Scope CurrentUser -Force  # Currently Done via Choco
+
+    # <https://github.com/PowerShell/PSReadLine>
+    # Install-Module -Name PSReadLine -AllowClobber -Force
 }
 
 # #################################################
