@@ -38,35 +38,25 @@ $SourceFolder = "$env:USERPROFILE\dotfiles\editors"
 
 # #################################################`
 # .editorconfig
-$SymLinkLocation = "c:\w_local_drive\.editorconfig"  # Don's use mapped drive (W:\) as it may not exist
-if (Test-Path $SymLinkLocation)
-{
-    Write-Host "`nSymbolicLink already exists at $SymLinkLocation. Doing nothing..."
-}
-else
-{
-    Write-Host "`nCreating SymbolicLink at $SymLinkLocation"
-    # Assigning to $null to suppress output of New-Item cmdlet
-    $null = New-Item -ItemType SymbolicLink -Path $SymLinkLocation -Target $SourceFolder\.editorconfig
-}
+$SymLinkLocation = "c:\w_local_drive\.editorconfig"  # Don't use mapped drive (W:\) as it may not exist
+
+Write-Host "`nCreating SymbolicLink at $SymLinkLocation"
+# Assign to $null to suppress output of New-Item cmdlet and force creation, even if it already exists
+$null = New-Item -ItemType SymbolicLink -Path $SymLinkLocation -Target $SourceFolder\.editorconfig -Force
+
 
 # #################################################`
 # Vim
-$SymLinkLocation =` "$env:USERPROFILE\_vimrc"
-if (Test-Path $SymLinkLocation)
-{
-    Write-Host "`nSymbolicLink already exists at $SymLinkLocation. Doing nothing..."
-}
-else
-{
-    Write-Host "`nCreating SymbolicLink at $SymLinkLocation"
-    # Assigning to $null to suppress output of New-Item cmdlet
-    $null = New-Item -ItemType SymbolicLink -Path $SymLinkLocation -Target $SourceFolder\vim\_vimrc
-}
+$SymLinkLocation = "$env:USERPROFILE\_vimrc"
+
+Write-Host "`nCreating SymbolicLink at $SymLinkLocation"
+# Assign to $null to suppress output of New-Item cmdlet and force creation, even if it already exists
+$null = New-Item -ItemType SymbolicLink -Path $SymLinkLocation -Target $SourceFolder\_vimrc -Force
 
 # Create .vim folder to store backups and swapfiles. Force creation.
 # Could do something like this in _vimrc: `mkdir ~/.vim/swaps`
 Write-Host "`nCreating Vim folders at $env:USERPROFILE\.vim"
+
 $null = New-Item -ItemType Directory -Force -Path $env:USERPROFILE\.vim\backupdir
 $null = New-Item -ItemType Directory -Force -Path $env:USERPROFILE\.vim\swapdir
 
