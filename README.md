@@ -49,6 +49,7 @@ Remove-Item dotfiles.zip
 
 ```text
 dotfiles/
+├── backup/           # Backup scripts
 ├── consoles/         # Terminal, PowerShell, Git Bash, Oh-My-Posh configs
 ├── editors/          # Vim, EditorConfig, Notepad++ configs
 ├── git/              # Git configs
@@ -140,6 +141,14 @@ Configure global Git settings:
 - Prompts for username and email
   - Creates `.gitconfig.user` for the _username_ information
 - Creates symbolic links for `.gitconfig` and `.gitignore`
+
+---
+
+### 6. Backup
+
+This contains batch files for the [FreeFileSync](https://freefilesync.org/) (FFS) backup software I use.
+
+There is no install for this, the PS1 script only runs the backup, and runs it from that folder.
 
 ---
 
