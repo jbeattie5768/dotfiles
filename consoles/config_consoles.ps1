@@ -40,9 +40,15 @@ $SourceFolder = "$env:USERPROFILE\dotfiles\consoles"
 
 # #################################################`
 # 1. PowerShell Profile
-$SymLinkLocation = "$env:USERPROFILE\OneDrive\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-Write-Host "`nCreating SymbolicLink at $SymLinkLocation"
-$null = New-Item -ItemType SymbolicLink -Force -Path $SymLinkLocation -Target $SourceFolder\Microsoft.PowerShell_profile.ps1
+$SymLinkLocation = "$env:USERPROFILE\Documents\PowerShell"
+$SymLinkFile = "Microsoft.PowerShell_profile.ps1"
+if (-Not (Test-Path $SymLinkLocation)) {
+    Write-Host "`nCreating PowerShell folder: $SymLinkLocation"
+    # Force writing the directory if it does not exist
+    $null = New-Item -ItemType Directory -Path $SymLinkLocation
+}
+Write-Host "`nCreating SymbolicLink: $SymLinkLocation\$SymLinkFile"
+$null = New-Item -ItemType SymbolicLink -Force -Path $SymLinkLocation\$SymLinkFile -Target $SourceFolder\$SymLinkFile
 
 # #################################################`
 # 2. Windows Terminal Settings
