@@ -14,6 +14,7 @@ It is designed to quickly _[sic]_ setup and configure a new MS Windows developme
 - Symbolic links are used in the scripts to keep configuration files in the repo and link them to their required locations.
 - See individual subfolder _README.md_ files for more details of each topic.
 - While user interactions has been reduced in the scripts, there are occasions where user input is required.
+- Don't use the Windows App Store, it installs the Apps in `C:\Program Files\WindowsApps` folder, which is a secure folder you don't have access to. See [this discussion](https://github.com/jbeattie5768/dotfiles/issues/3#:~:text=C%3A%5CProgram%20Files%5CWindowsApps%20folder%20is%20a%20secure%20folder%20containing%20Apps%20installed%20from%20the%20Store.%20See%20this%20discussion.).
 
 ---
 
