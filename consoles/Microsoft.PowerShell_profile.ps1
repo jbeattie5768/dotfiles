@@ -15,13 +15,14 @@ Import-Module -Name Terminal-Icons
 # Aliases and Functions
 # ############################
 # Reload profile with: . $PROFILE
-# View all Aliases with: Get-Alias
+# View all Aliases with: gal
 Set-Alias np "C:\windows\notepad.exe"
 Set-Alias npp "C:\Program Files\Notepad++\notepad++.exe"
 Set-Alias edit npp
 Set-Alias vi vim
 Set-Alias history Get-History
 
+# View all Functions with: gci function:
 function lw { Get-ChildItem | Format-Wide }  # gci | fw
 
 function grep {

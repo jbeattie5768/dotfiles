@@ -191,10 +191,14 @@ else{
 # 6. Python
 # #################################################
 
-Write-Host "`nInstalling Python"
+Write-Host "`nInstalling UV (Universal Version Manager)"  # See <https://astral.sh/uv/> for UV
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
+# Ruff and Python installed within `.\python_env\config_python_env.ps1`
 Write-Host "`nReminder: Install Python via UV, e.g.,"
-Write-Host "uv python install 3.14  # Latest 3.14 version"
+Write-Host "uv python install  # Latest Python version"
+Write-Host "See .\python_env\config_python_env.ps1 for more details"
+# Example manual install of specific Python version:
 # .\python-3.13.3-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir='C:\Python313'
 
 # #################################################

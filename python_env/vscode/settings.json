@@ -1,5 +1,12 @@
 {
     // //////////////////////////////////////////////////////////////
+    // General Settings
+    "telemetry.telemetryLevel": "off",
+    "workbench.colorTheme": "Monokai",
+    "breadcrumbs.enabled": true,
+    "window.title": "${activeEditorLong}${separator}${rootName}",
+
+    // //////////////////////////////////////////////////////////////
     // Editor: General Settings
     "editor.fontFamily": " 'Cascadia Code NF', 'Cascadia Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
@@ -35,17 +42,25 @@
       "files.autoGuessEncoding": true
     },
 
-    // Ruff settings
-    //"ruff.configuration": "~/path/to/ruff.toml"
+    // EditorConfig Extension Settings
+    // See .editorconfig file in project root(s) for details
+
+    // //////////////////////////////////////////////////////////////
+    // Ruff Settings - cfg now via pyproject.toml and ruff.toml files
+    // "ruff.configuration": "~/path/to/ruff.toml"
     // "ruff.logLevel": "debug", // "trace" | "debug" | "info" | "warn" | "error"
     // "ruff.logFile": "c:/temp/ruff.log",
 
+    // //////////////////////////////////////////////////////////////
+    // Testing Settings
     "python.testing.pytestArgs": [],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.cwd": "${workspaceFolder}/tests",
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
 
+    // //////////////////////////////////////////////////////////////
+    // Notebook Settings (Jupyter, et al)
     "notebook.formatOnSave.enabled": true,
     "notebook.codeActionsOnSave": {
       // "notebook.source.fixAll": "explicit",
@@ -54,7 +69,7 @@
 
     // //////////////////////////////////////////////////////////////
     // Terminal Settings
-    "terminal.integrated.defaultProfile.windows": "PowerShell",   // "Command Prompt",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",  // "Command Prompt",
     "terminal.integrated.allowedLinkSchemes": [
       "file",
       "http",
@@ -64,10 +79,20 @@
       "vscode-insiders",
       "docker-desktop"
     ],
+    "terminal.integrated.enablePersistentSessions": false,
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "python.createEnvironment.trigger": "off",
+    "python.terminal.shellIntegration.enabled": false,
+    "terminal.integrated.suggest.enabled": true,
 
     // //////////////////////////////////////////////////////////////
     // Copilot Settings: https://code.visualstudio.com/docs/copilot/reference/copilot-settings
-    // "github.copilot.chat.agent.thinkingTool": true,
+    "github.copilot.chat.agent.thinkingTool": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.instructionsFilesLocations": {
+      ".github/instructions": true,
+      "C:\\Users\\beatt\\.aitk\\instructions\\": true
+    },
 
     // //////////////////////////////////////////////////////////////
     // Python Settings
@@ -90,18 +115,21 @@
     "cSpell.language": "en-GB",
     "cSpell.userWords": [
       "beatt",
+      "pwsh",
       "pytest",
-      "venv",
-      "venvs"
+      "venv"
     ],
 
-    "github.copilot.nextEditSuggestions.enabled": true,
+    // //////////////////////////////////////////////////////////////
+    // Project Manager Extension Settings
     "projectManager.git.baseFolders": [
       "W:\\github"
     ],
-    "workbench.colorTheme": "Monokai",
 
-    "terminal.integrated.enablePersistentSessions": false,
-    "terminal.integrated.persistentSessionReviveProcess": "never"
+    // //////////////////////////////////////////////////////////////
+    // Git and GitLens Extension Settings
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "git.openRepositoryInParentFolders": "never"
 
 }

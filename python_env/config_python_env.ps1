@@ -39,14 +39,15 @@ else
 if (Test-Path (get-command uv.exe).Path)
 {
     Write-Host "`nUV found, continuing with UV latest 3.14 Python installation"
-    uv python install 3.14 --default  # Install system-wide latest 3.14 and set as default
-    uv python list                    # List installed Python versions
+    uv python install --default  # Install system-wide latest and set as default
+    uv python list               # List installed Python versions
 }
 else
 {
     Write-Host "`nUV not installed. Trying to install UV first..."
     # See `.\win_setup\install\install_apps.ps1` for this install
-    choco install -y uv
+    # No longer installing UV via Choco due to issues when upgrading UV via Choco
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
     Write-Host "`nUV installation completed. Restart this script."
     exit
 }
@@ -55,7 +56,7 @@ else
 # 2. System Tools
 Write-Host "`nInstalling System Tools with UV"
 # If already installed, UV will return "`xxx` is already installed"
-uv tool install ruff
+uv tool install ruff@latest
 uv tool install justpath
 uv tool install pre-commit
 
