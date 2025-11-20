@@ -19,6 +19,7 @@ $ExtensionsFile = ".\python_env\vscode\vscode_extensions.txt"  # File to store e
 Write-Host “`nSelect What to do With VSCode Extensions...”
 Write-Host “1: Enter '1' to export current user extensions and write them to $ExtensionsFile.”
 Write-Host “2: Enter '2' to import extensions into VSCode from $ExtensionsFile.”
+Write-Host “3: Enter '3' to import extensions into VSCode-Insiders Edition from $ExtensionsFile.”
 Write-Host “q: Enter 'q' or any other key to quit and do nothing with VSCode Extensions.”
 
 # #################################################
@@ -37,6 +38,15 @@ switch ($UserInput)
             foreach($line in Get-Content $ExtensionsFile) {
                 if($line.trim()) {  # Skip empty lines...likely to be one at EOF
                     code --install-extension $line
+                }
+            }
+    }
+    # #################################################
+    '3' {
+            # Clear-Host  # Clear Console # 'You chose option #3'
+            foreach($line in Get-Content $ExtensionsFile) {
+                if($line.trim()) {  # Skip empty lines...likely to be one at EOF
+                    code-Insiders --install-extension $line
                 }
             }
     }
