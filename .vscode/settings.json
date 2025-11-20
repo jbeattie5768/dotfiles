@@ -42,6 +42,7 @@
         "keymap",
         "MERGETASKS",
         "mergetool",
+        "mhutchie",
         "mklink",
         "Monokai",
         "MYVIMRC",
@@ -95,6 +96,7 @@
         "Winget",
         "winmerge",
         "wireshark",
+        "yandeu",
         "yzhang"
     ]
 }

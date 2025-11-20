@@ -89,6 +89,7 @@ build/
 dist/
 wheels/
 *.egg-info
+.mypy_cache/
 
 # Virtual Environments
 .venv
@@ -97,11 +98,11 @@ wheels/
 .ruff_cache/
 
 # Visual Studio Code
-.vscode/
+#.vscode/
 *.code-workspace
 
 # PyTest
-.cov*
+.coverage
 htmlcov/
 .pytest_cache/
 coverage.xml

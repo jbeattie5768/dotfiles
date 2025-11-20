@@ -14,7 +14,8 @@ ignore = [
     "COM812", # flake8-commas - mIssing trailing comma
     "D200",   # pydocstyle - unnecessary multiline docstring
     "D203",   # pydocstyle - blank line before class docstring
-    "D212",   # pydocstyle - docstring not on 1st line after opening quotes
+    "D213",   # pydocstyle - docstring not on 2nd line after opening quotes
+              # D212 and D213 are mutually exclusive. You should enable one or none of them.
     "D400",   # pydocstyle - missing trailing period in docstring
     "D401",   # pydocstyle - docstring first lines are not in an imperative mood
     "D415",   # pydocstyle - missing terminal punctuation (.,? or !)
