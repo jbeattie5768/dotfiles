@@ -33,5 +33,9 @@
     {
         "key": "ctrl+numpad0",
         "command": "-workbench.action.zoomReset"
+    },
+    {
+        "key": "ctrl+oem_8",  // usually the key next to "1" key
+        "command": "workbench.files.action.focusFilesExplorer"
     }
 ]

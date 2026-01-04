@@ -95,6 +95,7 @@
       ".github/instructions": true,
       "C:\\Users\\beatt\\.aitk\\instructions\\": true
     },
+    "chat.agent.maxRequests": 100,
 
     // //////////////////////////////////////////////////////////////
     // Python Settings
@@ -102,6 +103,9 @@
     // "python.analysis.inlayHints.variableTypes": true,
     // "python.analysis.inlayHints.functionReturnTypes": true,
     "python.analysis.typeCheckingMode": "strict",  // "basic" | "standard" | "strict" | "off"
+    "python.useEnvironmentsExtension": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.fixAll": ["source.unusedImports"],
 
     // //////////////////////////////////////////////////////////////
     // MCP Settings
@@ -117,11 +121,18 @@
     "cSpell.language": "en-GB",
     "cSpell.userWords": [
       "beatt",
+      "docstrings",
+      "funcs",
+      "getpid",
       "jbeattie",
+      "LIFX",
+      "math",
       "mypy",
       "pwsh",
+      "Pydantic",
       "pytest",
-      "venv"
+      "venv",
+      "Vite"
     ],
 
     // //////////////////////////////////////////////////////////////
@@ -131,9 +142,12 @@
     ],
 
     // //////////////////////////////////////////////////////////////
-    // Git and GitLens Extension Settings
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-    "git.openRepositoryInParentFolders": "never"
+    // Git and Git Extension(s) Settings
+    "git.openRepositoryInParentFolders": "never",
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    // //////////////////////////////////////////////////////////////
+    // Settings to be sorted later
+
 
 }
