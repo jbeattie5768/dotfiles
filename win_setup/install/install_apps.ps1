@@ -187,6 +187,10 @@ else{
     # Install-Module -Name PSReadLine -AllowClobber -Force
 }
 
+# Set PowerShell Env Variables
+# Opt-out of PowerShell Telemetry: <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_telemetry>
+[System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 1, 'User')
+
 # #################################################
 # 6. Python
 # #################################################
