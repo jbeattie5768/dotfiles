@@ -31,9 +31,16 @@ function grep {
     Get-ChildItem -Path .\ -Recurse -Include $args[0] | Select-String -Pattern $args[1]
 }
 
+function ?? { copilot -p "$args" }
+
 function wexe { (get-command $args[0]).Path}  # Equivalent to cmd `where`
 
 function touch { New-Item -ItemType File -Name $args[0] }
+
+function time {  # Time cmds, e.g. time uv run ruff check
+    $command = $args -join ' '
+    Measure-Command { Invoke-Expression $command | Out-Host }  # Without "Out-Host" there is no cmd output
+}
 
 # See: get-help get-process -full
 # Alternative is: <https://github.com/gsass1/NTop>
