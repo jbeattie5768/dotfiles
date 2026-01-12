@@ -60,6 +60,7 @@
     "python.testing.pytestEnabled": true,
     "python.testing.cwd": "${workspaceFolder}/tests",
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    // "python.defaultInterpreterPath": "c:\\Users\\beatt\\.local\\bin\\python.exe",
 
     // //////////////////////////////////////////////////////////////
     // Notebook Settings (Jupyter, et al)
@@ -86,6 +87,7 @@
     "python.createEnvironment.trigger": "off",
     "python.terminal.shellIntegration.enabled": false,
     "terminal.integrated.suggest.enabled": true,
+    "terminal.integrated.initialHint": false,
 
     // //////////////////////////////////////////////////////////////
     // Copilot Settings: https://code.visualstudio.com/docs/copilot/reference/copilot-settings
@@ -96,6 +98,7 @@
       "C:\\Users\\beatt\\.aitk\\instructions\\": true
     },
     "chat.agent.maxRequests": 100,
+    "chat.viewSessions.orientation": "stacked",
 
     // //////////////////////////////////////////////////////////////
     // Python Settings
