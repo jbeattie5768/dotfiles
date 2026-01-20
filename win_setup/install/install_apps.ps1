@@ -168,7 +168,7 @@ else{
 # 5. PowerShell Scripts
 # #################################################
 
-# Nice collections of Scripts at <https://github.com/fleschutz/PowerShell>
+# Nice collection of Scripts at <https://github.com/fleschutz/PowerShell>
 if($DisableScripts){
     Write-Host "Skipping PowerShell Scripts install"
 }

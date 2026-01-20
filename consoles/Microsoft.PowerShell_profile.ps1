@@ -31,7 +31,7 @@ function grep {
     Get-ChildItem -Path .\ -Recurse -Include $args[0] | Select-String -Pattern $args[1]
 }
 
-function ?? { copilot -p "$args" }
+function ?? { copilot -p "$args" --allow-all-tools }
 
 function wexe { (get-command $args[0]).Path}  # Equivalent to cmd `where`
 
