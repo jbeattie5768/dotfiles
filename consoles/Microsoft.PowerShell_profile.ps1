@@ -42,6 +42,8 @@ function time {  # Time cmds, e.g. time uv run ruff check
     Measure-Command { Invoke-Expression $command | Out-Host }  # Without "Out-Host" there is no cmd output
 }
 
+function weather { Invoke-RestMethod https://wttr.in }
+
 # See: get-help get-process -full
 # Alternative is: <https://github.com/gsass1/NTop>
 function top {
