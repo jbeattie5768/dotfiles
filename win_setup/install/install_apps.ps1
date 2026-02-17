@@ -123,6 +123,7 @@ else{
     winget search Microsoft.PowerShell  # Show Versions Available
     winget install --id Microsoft.PowerShell.Preview --source winget  # v7
     winget install --force Microsoft.VisualStudioCode --override '/VERYSILENT /SP- /MERGETASKS="!runcode,!desktopicon,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"'
+    winget install GitHub.Copilot  # CoPilot CLI, will need further configuration after install, see <https://docs.github.com/copilot/cli/getting-started-with-the-copilot-cli> for more details
 }
 # #################################################
 # 3. WSL
