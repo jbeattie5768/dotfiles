@@ -8,7 +8,7 @@ oh-my-posh --init --shell pwsh --config ~/jb29_theme.omp.json | Invoke-Expressio
 # ############################
 # Modules
 # ############################
-# Assumes `Import-Module -Name Terminal-Icons` already done
+# Assumes `Install-Module -Name Terminal-Icons -Repository PSGallery` already done
 Import-Module -Name Terminal-Icons
 
 # ############################
