@@ -5,7 +5,7 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-    "keybindings": 
+    "keybindings":
     [
         {
             "id": "Terminal.CopyToClipboard",
@@ -25,26 +25,26 @@
         }
     ],
     "launchMode": "maximized",
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
-            "font": 
+            "font":
             {
                 "face": "Cascadia Code NF"
             }
         },
-        "list": 
+        "list":
         [
             {
                 "commandline": "C:\\Program Files\\Git\\bin\\bash.exe",
-                "font": 
+                "font":
                 {
                     "face": "Cascadia Code NF"
                 },
@@ -56,7 +56,7 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "font": 
+                "font":
                 {
                     "face": "Cascadia Code NF"
                 },
@@ -66,7 +66,7 @@
             },
             {
                 "commandline": "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe -NoLogo",
-                "font": 
+                "font":
                 {
                     "face": "Cascadia Code NF"
                 },
@@ -77,7 +77,7 @@
                 "startingDirectory": "W:\\"
             },
             {
-                "font": 
+                "font":
                 {
                     "face": "Cascadia Code NF"
                 },
@@ -90,7 +90,7 @@
                 "colorScheme": "Campbell",
                 "commandline": "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe",
                 "elevate": true,
-                "font": 
+                "font":
                 {
                     "face": "Cascadia Code NF"
                 },
@@ -108,7 +108,7 @@
         ]
     },
     "schemes": [],
-    "startupActions": "--maximized; new-tab -p \"Git Bash\"; focus-tab -t 0",
+    "startupActions": "--maximized; new-tab; new-tab; new-tab -p \"Git Bash\"; focus-tab -t 0",
     "themes": [],
     "useAcrylicInTabRow": true
 }
