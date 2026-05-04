@@ -43,6 +43,14 @@
     </Filter>
     <FolderPairs>
         <Pair>
+            <Left>C:\temp</Left>
+            <Right>D:\laptop_backup\jb29_asus\temp</Right>
+        </Pair>
+        <Pair>
+            <Left>G:\My Drive\Personal\Obsidian_Vaults</Left>
+            <Right>D:\laptop_backup\jb29_asus\google_drive\Personal\Obsidian_Vaults</Right>
+        </Pair>
+        <Pair>
             <Left>C:\Users\beatt</Left>
             <Right>D:\laptop_backup\jb29_asus\user_beat</Right>
             <Filter>
