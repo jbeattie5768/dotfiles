@@ -8,7 +8,12 @@ oh-my-posh --init --shell pwsh --config ~/jb29_theme.omp.json | Invoke-Expressio
 # ############################
 # Modules
 # ############################
-# Assumes `Install-Module -Name Terminal-Icons -Repository PSGallery` already done
+
+# See https://github.com/devblackops/Terminal-Icons/issues/126
+$terminalIconsFolder = "$env:APPDATA\powershell\Community\Terminal-Icons"
+if (Test-Path $terminalIconsFolder){
+    Remove-Item $terminalIconsFolder -Recurse
+}
 Import-Module -Name Terminal-Icons
 
 # ############################
