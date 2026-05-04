@@ -123,9 +123,12 @@
     // //////////////////////////////////////////////////////////////
     // cSpell Extension Settings
     "cSpell.language": "en-GB",
+    "cSpell.ignoreRandomStrings": true,
+    "cSpell.minRandomLength": 8,
     "cSpell.userWords": [
       "beatt",
       "docstrings",
+      "dotenv",
       "funcs",
       "getpid",
       "jbeattie",
@@ -135,8 +138,13 @@
       "pwsh",
       "Pydantic",
       "pytest",
+      "resp",
+      "sess",
+      "USERLOGIN",
       "venv",
-      "Vite"
+      "Vite",
+      "wifi",
+      "xdsl"
     ],
 
     // //////////////////////////////////////////////////////////////
@@ -149,6 +157,8 @@
     // Git and Git Extension(s) Settings
     "git.openRepositoryInParentFolders": "never",
     "diffEditor.ignoreTrimWhitespace": false,
+    "python.defaultInterpreterPath": "c:\\Users\\beatt\\.local\\bin\\python3.14.exe",
+    "@azure.argTenant": "",
 
     // //////////////////////////////////////////////////////////////
     // Settings to be sorted later

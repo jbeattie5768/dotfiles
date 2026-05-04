@@ -29,7 +29,8 @@
 
 # Logs and databases #
 ######################
-**/logs
+**/[Ll]ogs
+**/[Ll]og
 *.log
 *.sql
 *.sqlite
@@ -100,6 +101,9 @@ wheels/
 # Visual Studio Code
 #.vscode/
 *.code-workspace
+
+# JetBrains
+#.idea
 
 # PyTest
 .coverage
