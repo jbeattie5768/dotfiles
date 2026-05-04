@@ -1,6 +1,6 @@
-"===============
-" VIM SETTINGS
-"===============
+"========================
+" VIM SETTINGS - Windows
+"========================
 "---------------
 " Comments to describe what the line of code below does
 "" Actual working code for the .vimrc file but still commented.
@@ -28,16 +28,29 @@ set viminfo+=n~/.vim/viminfo
 " Settings
 "---------------
 " Enable type file detection.
-filetype on
-
+""filetype on
 " Enable plugins and load plugin for the detected file type.
-filetype plugin on
-
+""filetype plugin on
 " Load an indent file for the detected file type.
-filetype indent on
+""filetype indent on
+" Load the 3 above with one command
+filetype plugin indent on
 
 " Turn syntax highlighting on.
 syntax on
 
 " Add numbers to each line on the left-hand side.
 set number
+
+" restore-cursor last-position-jump
+augroup RestoreCursor
+  autocmd!
+  autocmd BufReadPost *
+    \ let line = line("'\"")
+    \ | if line >= 1 && line <= line("$") && &filetype !~# 'commit'
+    \      && index(['xxd', 'gitrebase'], &filetype) == -1
+    \      && !&diff
+    \ |   execute "normal! g`\""
+    \ | endif
+augroup END
+
