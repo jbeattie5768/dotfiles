@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Description: Display dotfiles information
+
+dotfiles_dir="$HOME/dotfiles"
+today=$(date +%Y-%m-%d)
+
+# count files
+# file_count=$(ls "$dotfiles_dir" | wc -l)  # SC2012 error
+
+file_count=$(find "$dotfiles_dir" -mindepth 1 -maxdepth 1 | wc -l)
+# `-mindepth 1` excludes the directory itself
+# `-maxdepth 1` stops `find` from going into subdirectories
+# Hidden files are included.
+
+echo "=== Dotfiles Info ==="
+echo "User: $USER"
+echo "Dotfiles location: $dotfiles_dir"
+echo "Files tracked: $file_count"
+echo "Date: $today"
