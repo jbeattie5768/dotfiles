@@ -149,3 +149,5 @@ fi
 
 unset env
 
+alias path=justpath
+
